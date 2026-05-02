@@ -1,0 +1,34 @@
+dirx = "C:\\temp\\"
+arquivo = "ex31.txt"
+
+def gravar(ordem, texto, primeiro):
+    linha = str(ordem) + ': ' + str(texto) + '\n'
+    file = dirx + arquivo
+    enc = 'utf-8'
+
+    if primeiro:
+        tipo = "w"
+    else:
+        tipo = "a"
+
+    with open(file, tipo, encoding=enc) as f:
+        f.write(linha)
+
+def main():
+    if not os.path.exists(dirx):
+        os.makedirs(dirx)
+        
+    n = 10
+    primeira_vez = True 
+    
+    while n <= 150:
+        x = n * n
+        print(x)
+
+        gravar(n, x, primeira_vez)
+
+        primeira_vez = False 
+        n += 1
+        
+if __name__ == '__main__':
+    main()

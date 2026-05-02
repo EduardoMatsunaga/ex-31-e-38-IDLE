@@ -1,0 +1,56 @@
+
+dirx = "C:\\temp\\"
+arquivo = "ex37.txt"
+
+def gravar(termo, primeiro):
+    linha = str(termo) + '\n'
+    file = dirx + arquivo
+    
+    tipo = 'w' if primeiro else 'a'
+    
+    with open(file, tipo, encoding='utf-8') as f:
+        f.write(linha)
+
+def validar_impar(numero):
+   
+    if numero % 2 != 0:
+        return numero
+    return -1
+
+def leitura():
+    file = dirx + arquivo
+    if os.path.exists(file):
+        print("\n--- Números Ímpares da Sequência ---")
+        with open(file, 'r', encoding='utf-8') as f:
+            for linha in f:
+                num = int(linha.strip())
+                resultado = validar_impar(num)
+                if resultado != -1:
+                    print(resultado)
+
+def main():
+    if not os.path.exists(dirx):
+        os.makedirs(dirx)
+
+    n_termos = int(input("Digite quantos termos da série de Fibonacci deseja: "))
+    
+
+    a, b = 0, 1
+    contador = 1
+    primeira_vez = True
+    
+    print("\nGerando e gravando Fibonacci")
+    while contador <= n_termos:
+        
+        print(a, end=" ")
+        
+        gravar(a, primeira_vez)
+        primeira_vez = False
+        a, b = b, a + b
+        contador += 1
+    
+   
+    leitura()
+
+if __name__ == '__main__':
+    main()
